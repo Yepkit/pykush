@@ -1,27 +1,27 @@
 # pykush
+```
   __   __         _    _ _
   \ \ / /__ _ __ | | _(_) |_
    \ V / _ \ '_ \| |/ / | __|
     | |  __/ |_) |   <| | |_
     |_|\___| .__/|_|\_\_|\__|
            |_|
-
+```
 **[Yepkit](http://www.yepkit.com/) [YKUSH](https://www.yepkit.com/products/ykush) Python library and command line tool**
 
 Provides library and command line functionality for communicating with a [YKUSH](https://www.yepkit.com/products/ykush) device over USB.
 
 Thanks to the developers and maintainers of the following projects among others:
-   [HIDAPI](https://github.com/signal11/hidapi) multi-platform library
-   Python [hidapi](https://pypi.python.org/pypi/hidapi) wrapper module
-   Python [hidapi-cffi](https://pypi.python.org/pypi/hidapi-cffi) wrapper module
-
+- [HIDAPI](https://github.com/signal11/hidapi) multi-platform library
+- Python [hidapi](https://pypi.python.org/pypi/hidapi) wrapper module
+- Python [hidapi-cffi](https://pypi.python.org/pypi/hidapi-cffi) wrapper module
 Any of the above python wrappers are currently supported.
 
 ## Features
 
 - Easy to [use](https://github.com/Yepkit/pykush#usage)
 - Written to support [YKUSH]((https://www.yepkit.com/products/ykush)), the Yepkit USB Switchable Hub
-- Open-source, please be our guest to [collaborate](https://github.com/Yepkit/pykush)
+- Open-source, please be our guest to collaborate
 - Current development version supports both Python 2 and 3
 - Works on Linux, Windows and Mac
 
@@ -35,10 +35,10 @@ Any of the above python wrappers are currently supported.
 ## Installation
 
 If you are in a hurry and just need a console application you can give our Pyinstaller bundled executable a try:
-- Windows executable, Windows XP or newer
-- macOS executable, El Capitan or newer
-- Linux x86_64, kernel 2.6 or newer
-- Linux i386, kernel 2.6 or newer
+- [Windows](https://github.com/Yepkit/pykush/releases/download/v0.3.6/windows.zip) executable, Windows XP or newer
+- [macOS](https://github.com/Yepkit/pykush/releases/download/v0.3.6/macos.zip) executable, El Capitan or newer
+- [Linux x86_64](https://github.com/Yepkit/pykush/releases/download/v0.3.6/linux64.zip), kernel 2.6 or newer
+- [Linux i386](https://github.com/Yepkit/pykush/releases/download/v0.3.6/linux32.zip), kernel 2.6 or newer
 
 Download the executable corresponding to your platform and run it from a terminal window.
 Also remember to authorize execution on Linux or macOS systems:
