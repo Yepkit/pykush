@@ -251,6 +251,14 @@ class YKUSH(object):
         else:
             return [YKUSH_PORT_STATE_ERROR] * self.get_downstream_port_count()
 
+    def get_gpio(self, pin_number):
+        '''Returns a specific GPIO pin state; returns 0, 1, or 255 (error)'''
+        if pin_number in range(1,4):
+            status, _, _, gpio_state = self._raw_sendreceive([0x30, pin_number])[:4]
+            if status == YKUSH_PROTO_OK_STATUS:
+                return gpio_state
+        return YKUSH_PORT_STATE_ERROR
+
     def set_port_state(self, port_number, new_state):
         '''Set a specific downstream port Up (1) or Down (0), returns True if the operation suceeded'''
         if port_number in range(1, self.get_downstream_port_count() + 1) and new_state in range(2):
@@ -273,6 +281,13 @@ class YKUSH(object):
             return self._raw_sendreceive([0x3b])[0] == YKUSH_PROTO_OK_STATUS
         else:
             # unsupported on early firmware versions
+            return False
+
+    def set_gpio(self, pin_number, new_state):
+        '''Set a GPIO pin to the specified state'''
+        if pin_number in range(1, 4) and new_state in range(2):
+            return self._raw_sendreceive([0x31, pin_number, new_state])[0] == YKUSH_PROTO_OK_STATUS
+        else:
             return False
 
     def _raw_sendreceive(self, packetarray):
@@ -307,6 +322,8 @@ def main():
                        help='the downstream port numbers to power up, none means all')
     group.add_argument('-d', '--down', type=int, nargs='*',
                        help='the downstream port numbers to power down, none means all')
+    group.add_argument('-r', '--read', type=int, help='the GPIO pin to read from')
+    group.add_argument('-w', '--write', type=int, nargs=2, help='the GPIO pin to write to')
     group.add_argument('-p', '--persist', default=None,
                        help='make the current running configuration persistent across reboots (only supported on devices with firmware v2.0 and above)',
                        action='store_true')
@@ -376,6 +393,11 @@ def main():
                                     print('done' if ykush.set_running_configuration_persistent() else 'unexpected error')
                                 else:
                                     print('    error, command only supported on devices with firmware v2.0 and above')
+                            if args.read:
+                                print('    GPIO pin %i state: %s' % (args.read, YKUSH_PORT_STATE_DICT[ykush.get_gpio(args.read)]))
+                            if args.write:
+                                print('    powering %s GPIO pin %i... ' % (YKUSH_PORT_STATE_DICT[args.write[1]], args.write[0]), end='')
+                                print('done' if ykush.set_gpio(*args.write) else 'error, could not configure the specified pin')
         if not ykush_found:
             print('no YKUSH devices found')
     except (ValueError, IOError, OSError) as e:
