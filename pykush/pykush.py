@@ -323,7 +323,7 @@ def main():
     group.add_argument('-d', '--down', type=int, nargs='*',
                        help='the downstream port numbers to power down, none means all')
     group.add_argument('-r', '--read', type=int, help='the GPIO pin to read from')
-    group.add_argument('-w', '--write', type=int, nargs=2, help='the GPIO pin to write to')
+    group.add_argument('-w', '--write', type=int, nargs=2, help='the GPIO pin to write to and the value to write')
     group.add_argument('-p', '--persist', default=None,
                        help='make the current running configuration persistent across reboots (only supported on devices with firmware v2.0 and above)',
                        action='store_true')
