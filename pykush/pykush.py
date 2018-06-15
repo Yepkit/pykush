@@ -216,6 +216,9 @@ class YKUSH(object):
             if status == YKUSH_PROTO_OK_STATUS:
                 # YKUSH recognized the request
                 self._downstream_port_count = count
+            elif self._devhandle.get_product_string() == 'YKUSH3':
+                # YKUSH3 has an additional power-only port
+                self._downstream_port_count = 4
             else:
                 # original YKUSH port count
                 self._downstream_port_count = 3
