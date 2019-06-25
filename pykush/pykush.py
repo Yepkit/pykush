@@ -189,6 +189,7 @@ class YKUSHNotFound(Exception):
 
 
 class YKUSH(object):
+
 	'''YKUSH hidapi based interface class'''
 
 	def __init__(self, serial=None, path=None):
@@ -442,6 +443,7 @@ def main():
 		print('communication error, exception details:')
 		print('  error "%s"' % e.message)
 		sys.exit(1)
+
 
 if __name__ == '__main__':
 	main()

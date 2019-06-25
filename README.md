@@ -69,8 +69,8 @@ $ python setup.py install
 
 ```bash
 $ python pykush.py -h
-usage: pykush_hidapi.py [-h] [-s SERIAL]
-                        (-l | -u [UP [UP ...]] | -d [DOWN [DOWN ...]] | -p)
+usage: pykush.py [-h] [-s SERIAL]
+                 (-l | -u [UP [UP ...]] | -d [DOWN [DOWN ...]] | -r READ | -w WRITE WRITE | -p)
 
 Yepkit YKUSH command line tool.
 
@@ -84,8 +84,11 @@ optional arguments:
                         the downstream port numbers to power up, none means
                         all
   -d [DOWN [DOWN ...]], --down [DOWN [DOWN ...]]
-                        the downstream port numbers to power down, none
-                        means all
+                        the downstream port numbers to power down, none means
+                        all
+  -r READ, --read READ  the GPIO pin to read from
+  -w WRITE WRITE, --write WRITE WRITE
+                        the GPIO pin to write to
   -p, --persist         make the current running configuration persistent
                         across reboots (only supported on devices with
                         firmware v2.0 and above)
