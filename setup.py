@@ -5,13 +5,14 @@ from __future__ import unicode_literals
 
 from setuptools import setup, find_packages
 
-version = '0.3.0'
+version = '0.3.5'
 
 setup(
-    name='pykush',
+    name='yepkit-pykush',
     version=version,
     description='Yepkit YKUSH Python API and command line tool',
     long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     author='ckuesters',
     author_email='ckuesters@yepkit.com',
     license='MIT',
