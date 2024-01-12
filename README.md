@@ -63,6 +63,12 @@ $ cd pykush/
 $ python setup.py install
 ```
 
+### With python pip
+
+```bash
+$ pip install yepkit-pykush
+```
+
 ## Usage
 
 ### Basic command line usage
@@ -112,7 +118,7 @@ managing YKUSH family devices
 ### Basic module programming usage
 ```bash
 $ python
->>> import pykush
+>>> import pykush.pykush as pykush
 >>> yk = pykush.YKUSH()
 >>> yk.set_allports_state_up()
 True
