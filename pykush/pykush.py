@@ -94,7 +94,7 @@ Module sample usage:
 
 Notes:
   * None
-  
+
 Alber 31-01-2019 00:45am
 
 YkushXs : 0xF0CD
@@ -106,7 +106,7 @@ Sugest :
 1.1.Add 0xf0cd in YKUSH_USB_PID_LIST[] ,and YKUSHXS mode
 2.1.Delete 0xf0cd in YKUSH_USB_PID_BL_LIST[]
 2.2.Add PreValue 0xffff
-3.1.Find YKUSH_USB_PID_BL_LIST[] then check it in or == 
+3.1.Find YKUSH_USB_PID_BL_LIST[] then check it in or ==
 -incase of YKUSH_USB_PID_BL_LIST[] have only one value for bootloader mode, i suggest to add a prevalue
 3.2.Add device is 0xf0cd
 3.3.check if 0xf0cd:YKUSHXS Make it have 1 port
@@ -283,6 +283,13 @@ class YKUSH(object):
 			# firmware glitch workaround
 			return [self.get_port_state(p) for p in range(1, self.get_downstream_port_count() + 1)]
 
+	def get_power_output_state(self):
+		'''Returns the power output port state; returns 0 (port down), 1 (port up) or 255 (error)'''
+		status, port_state = self._raw_sendreceive([0x24])[:2]
+		if status == YKUSH_PROTO_OK_STATUS:
+			return YKUSH_PORT_STATE_UP if port_state == 0x14 else YKUSH_PORT_STATE_DOWN
+		return YKUSH_PORT_STATE_ERROR
+
 	def get_allports_persistent_state(self):
 		'''Returns all downstream persistent port states; an array filled with 1 (port up), 0 (port down) or 255 (port error) in port order'''
 		recvbytes = self._raw_sendreceive([0x3a])[:self.get_downstream_port_count() + 1]
@@ -308,6 +315,14 @@ class YKUSH(object):
 	def set_allports_state_up(self):
 		'''Power up all YKUSH downstreams ports, returns True if the operation suceeded'''
 		return self._raw_sendreceive([0x1a])[0] == YKUSH_PROTO_OK_STATUS
+
+	def set_power_output_on(self):
+		'''Switch ON the 5V power output port, returns True if the operation suceeded'''
+		return self._raw_sendreceive([0x14])[0] == YKUSH_PROTO_OK_STATUS
+
+	def set_power_output_off(self):
+		'''Switch OFF the 5V power output port, returns True if the operation suceeded'''
+		return self._raw_sendreceive([0x04])[0] == YKUSH_PROTO_OK_STATUS
 
 	def set_running_configuration_persistent(self):
 		'''Make persistent the current device configuration, returns True if the operation suceeded'''
@@ -349,6 +364,8 @@ def main():
 					   help='the downstream port numbers to power up, none means all')
 	group.add_argument('-d', '--down', type=int, nargs='*',
 					   help='the downstream port numbers to power down, none means all')
+	group.add_argument('-o', '--power_on', help='switch ON 5V power output', action='store_true')
+	group.add_argument('-f', '--power_off', help='switch OFF 5V power output', action='store_true')
 	group.add_argument('-p', '--persist', default=None,
 					   help='make the current running configuration persistent across reboots (only supported on devices with firmware v2.0 and above)',
 					   action='store_true')
@@ -431,6 +448,12 @@ def main():
 							for cfg in cmds:
 								print('    powering %s port %i... ' % (YKUSH_PORT_STATE_DICT[cfg[1]], cfg[0]), end='')
 								print('done' if ykush.set_port_state(cfg[0], cfg[1]) else 'error, could not configure the specified port number')
+							if args.power_on:
+								print('    powering ON 5V switchable power output... ', end='')
+								print('done' if ykush.set_power_output_on() else 'unexpected error')
+							if args.power_off:
+								print('    powering OFF 5V switchable power output... ', end='')
+								print('done' if ykush.set_power_output_off() else 'unexpected error')
 							if args.persist:
 								if ykush.get_firmware_version()[0] > 1:
 									print('    making running device configuration persistent... ', end='')
