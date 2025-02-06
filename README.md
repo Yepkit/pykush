@@ -92,6 +92,8 @@ optional arguments:
   -d [DOWN [DOWN ...]], --down [DOWN [DOWN ...]]
                         the downstream port numbers to power down, none means
                         all
+  -o, --power_on        switch ON 5V power output
+  -f, --power_off       switch OFF 5V power output
   -r READ, --read READ  the GPIO pin to read from
   -w WRITE WRITE, --write WRITE WRITE
                         the GPIO pin to write to
