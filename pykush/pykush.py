@@ -1,12 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 """
-__   __         _    _ _
-\ \ / /__ _ __ | | _(_) |_
- \ V / _ \ '_ \| |/ / | __|
-  | |  __/ |_) |   <| | |_
-  |_|\___| .__/|_|\_\_|\__|
-		 |_| http://yepkit.com/
+https://www.yepkit.com/
 
 Yepkit YKUSH Python API and command line tool
 
