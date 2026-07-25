@@ -34,18 +34,7 @@ Any of the above python wrappers are currently supported.
 
 ## Installation
 
-If you are in a hurry and just need a console application you can give our Pyinstaller bundled executable a try:
-- [Windows](https://github.com/Yepkit/pykush/releases/download/v0.3.6/windows.zip) executable, Windows XP or newer
-- [macOS](https://github.com/Yepkit/pykush/releases/download/v0.3.6/macos.zip) executable, El Capitan or newer
-- [Linux x86_64](https://github.com/Yepkit/pykush/releases/download/v0.3.6/linux64.zip), kernel 2.6 or newer
-- [Linux i386](https://github.com/Yepkit/pykush/releases/download/v0.3.6/linux32.zip), kernel 2.6 or newer
-
-Download the executable corresponding to your platform and run it from a terminal window.
-Also remember to authorize execution on Linux or macOS systems:
-```bash
-$ chown u+x pykush
-$ ./pykush -l
-```
+Standalone Pyinstaller-bundled executables are no longer distributed as of releases after v0.3.6. Unsigned, non-reproducibly-built binaries were prone to being flagged as malware by antivirus/heuristic scanners. Please install from source or via pip instead.
 
 ### From source
 
