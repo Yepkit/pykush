@@ -141,7 +141,7 @@ except (ImportError, OSError):
 		print('\thttps://github.com/Yepkit/pykush')
 		raise
 
-__version__ = '0.3.6'
+__version__ = '0.4.1'
 
 # YKUSH device USB VID
 YKUSH_USB_VID = 0x04d8
@@ -459,7 +459,7 @@ def main():
 			print('no YKUSH devices found')
 	except (ValueError, IOError, OSError) as e:
 		print('communication error, exception details:')
-		print('  error "%s"' % e.message)
+		print('  error "%s"' % str(e))
 		sys.exit(1)
 
 
