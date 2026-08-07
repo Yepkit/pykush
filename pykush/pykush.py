@@ -26,7 +26,7 @@ Date: 2016-10-01
 Command line usage:
 
 	usage: pykush_hidapi.py [-h] [-s SERIAL]
-							(-l | -u [UP [UP ...]] | -d [DOWN [DOWN ...]] | -p)
+							(-l | -u [UP [UP ...]] | -d [DOWN [DOWN ...]] -o | -f | -p)
 
 	Yepkit YKUSH command line tool.
 
@@ -42,6 +42,8 @@ Command line usage:
 	  -d [DOWN [DOWN ...]], --down [DOWN [DOWN ...]]
 							the downstream port numbers to power down, none
 							means all
+	  -o, --power_on        switch ON 5V power output
+	  -f, --power_off       switch OFF 5V power output
 	  -p, --persist         make the current running configuration persistent
 							across reboots (only supported on devices with
 							firmware v2.0 and above)
